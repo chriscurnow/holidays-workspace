@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "projects": {
+    "holidays": {
+      "projectType": "application",
+      "root": "apps/holidays",
+      "sourceRoot": "apps/holidays/src",
+      "prefix": "chriscurnow",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/holidays",
+            "index": "apps/holidays/src/index.html",
+            "main": "apps/holidays/src/main.ts",
+            "polyfills": "apps/holidays/src/polyfills.ts",
+            "tsConfig": "apps/holidays/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/holidays/src/favicon.ico",
+              "apps/holidays/src/assets"
+            ],
+            "styles": ["apps/holidays/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/holidays/src/environments/environment.ts",
+                  "with": "apps/holidays/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "holidays:build:production"
+            },
+            "development": {
+              "browserTarget": "holidays:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "holidays:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/holidays/src/**/*.ts",
+              "apps/holidays/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/holidays"],
+          "options": {
+            "jestConfig": "apps/holidays/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "holidays-e2e": {
+      "root": "apps/holidays-e2e",
+      "sourceRoot": "apps/holidays-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/holidays-e2e/cypress.json",
+            "devServerTarget": "holidays:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "holidays:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/holidays-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["holidays"]
+    }
+  }
+}

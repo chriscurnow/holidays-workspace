@@ -9,7 +9,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/holidays",
             "index": "apps/holidays/src/index.html",
@@ -21,7 +23,10 @@
               "apps/holidays/src/favicon.ico",
               "apps/holidays/src/assets"
             ],
-            "styles": ["apps/holidays/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/holidays/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -86,10 +91,22 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/holidays"],
+          "outputs": [
+            "coverage/apps/holidays"
+          ],
           "options": {
             "jestConfig": "apps/holidays/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "holidays:build:production",
+            "firebaseProject": "holidays-300107",
+            "firebaseHostingSite": "holidays-300107"
           }
         }
       },
@@ -114,14 +131,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/holidays-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/holidays-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["holidays"]
+      "implicitDependencies": [
+        "holidays"
+      ]
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "holidays-300107": {
+      "hosting": {
+        "holidays": [
+          "holidays-300107"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "holidays-300107"
+  }
+}

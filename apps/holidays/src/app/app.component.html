@@ -1,1 +1,7 @@
-<chriscurnow-nx-welcome></chriscurnow-nx-welcome>
+<h1>Holidays</h1>
+
+<ul>
+  <li *ngFor="let h of holidays" class="holiday">{{ h.title }}</li>
+</ul>
+
+<button id="add-holiday" (click)="addHoliday()">Add Todo</button>
